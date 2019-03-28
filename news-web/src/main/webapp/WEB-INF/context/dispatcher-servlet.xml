@@ -23,4 +23,5 @@
     <mvc:resources mapping="/ckfinder/**" location="/ckfinder/" />
     <mvc:resources mapping="/image/**" location="/image/" />-->
 
+
 </beans>

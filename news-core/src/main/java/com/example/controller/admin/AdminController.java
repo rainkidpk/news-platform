@@ -12,9 +12,6 @@ public class AdminController {
     @RequestMapping(value = "/admin-page", method = RequestMethod.GET)
     public ModelAndView adminPage(){
         ModelAndView mav = new ModelAndView("admin/home");
-        UserDTO userDTO = new UserDTO();
-        userDTO.setUserName("Wellcome Admin");
-        mav.addObject("user", userDTO);
         return mav;
     }
 

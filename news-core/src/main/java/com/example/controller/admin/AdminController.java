@@ -9,11 +9,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller(value = "homeControllerOfAdmin")
 public class AdminController {
 
-    @RequestMapping(value = "/admin-page", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/home", method = RequestMethod.GET)
     public ModelAndView adminPage(){
         ModelAndView mav = new ModelAndView("admin/home");
         return mav;
     }
+
 
 
 }

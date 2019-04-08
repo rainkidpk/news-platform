@@ -2,6 +2,7 @@ package com.example.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="users")
@@ -20,6 +21,12 @@ public class UserEntity extends BaseEntity{
 
     @Column
     private int status;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="user_role", joinColumns =
+            {@JoinColumn(name = "user_id", nullable = false) }, inverseJoinColumns = {
+             @JoinColumn(name = "role_id", nullable = false) })
+    private List<RoleEntity> roles;
 
 
     public String getUserName() {
@@ -52,5 +59,13 @@ public class UserEntity extends BaseEntity{
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public List<RoleEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<RoleEntity> roles) {
+        this.roles = roles;
     }
 }

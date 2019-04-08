@@ -1,17 +1,28 @@
+<%@ page import="com.example.utils.SecurityUtils" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+		 pageEncoding="UTF-8"%>
 <%@include file="/common/taglib.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <div class="header">
 			<div class="headertop_desc">
 				<div class="account_desc">
 					<ul>
+						<security:authorize access="isAnonymous()">
 							<li>
 								<a href="#">Đăng ký</a>
 							</li>
 							<li>
-								<a href='#'>Đăng nhập</a>
+								<a href='<c:url value="/dang-nhap"/> '>Đăng nhập</a>
 							</li>
+						</security:authorize>
+						<security:authorize access="isAuthenticated()">
+							<li>
+								<a href="#">Wellcome <%=SecurityUtils.getPrincipal().getFullName()%></a>
+							</li>
+							<li>
+								<a href='<c:url value="/logout"/> '>Thoát</a>
+							</li>
+						</security:authorize>
 					</ul>
 				</div>
 				<div class="clear"></div>

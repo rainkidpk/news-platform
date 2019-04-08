@@ -1,3 +1,4 @@
+<%@ page import="com.example.utils.SecurityUtils" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
 <%@include file="/common/taglib.jsp"%>
@@ -18,10 +19,10 @@
 					<ul class="nav ace-nav">
 						<li class="light-blue dropdown-modal">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">								
-									Welcome Admin
+									Welcome <%=SecurityUtils.getPrincipal().getFullName()%>
 							</a>
 							<li class="light-blue dropdown-modal">
-								<a href="#">
+								<a href="<c:url value="/logout"/> ">
 									<i class="ace-icon fa fa-power-off"></i>
 									Thoát
 								</a>

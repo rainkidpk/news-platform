@@ -45,7 +45,7 @@
                 <b class="arrow"></b>
                 <ul class="submenu">
                     <li class="">                       
-                        <a href='#'>
+                        <a href='<c:url value=""/> '>
                             <i class="menu-icon fa fa-caret-right"></i>
                             Danh sách bài đăng
                         </a>

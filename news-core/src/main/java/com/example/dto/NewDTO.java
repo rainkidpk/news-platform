@@ -1,6 +1,8 @@
 package com.example.dto;
 
-public class NewDTO {
+public class NewDTO extends AbstractDTO<NewDTO>{
+
+    private static final long serialVersionUID = 1284356519231472812L;
 
     private String code;
     private String thumbnail;

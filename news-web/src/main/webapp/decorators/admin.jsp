@@ -28,9 +28,9 @@
     <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
     <link href="/template/css/comment-tree.css" rel="stylesheet" type="text/css">
 
-   <%-- <script type="text/javascript" src="<c:url value="/ckeditor/ckeditor.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/ckeditor/ckeditor.js"/>"></script>
 
-    <script type="text/javascript" src="<c:url value="/ckfinder/ckfinder.js"/>"></script>--%>
+    <script type="text/javascript" src="<c:url value="/ckfinder/ckfinder.js"/>"></script>
 
     <%--common javascript file--%>
     <script type="text/javascript" src="<c:url value="/template/js/global_admin_script.js"/>"></script>

@@ -25,6 +25,11 @@ public class NewEntity extends BaseEntity{
     private String shortDescription;
 
 
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private CategoryEntity category;
+
+
 
 
     public String getCode() {
@@ -67,4 +72,11 @@ public class NewEntity extends BaseEntity{
         this.shortDescription = shortDescription;
     }
 
+    public CategoryEntity getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryEntity category) {
+        this.category = category;
+    }
 }

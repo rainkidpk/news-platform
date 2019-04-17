@@ -11,4 +11,5 @@ public class SystemConstant {
 	public static final int COLUMN_BEFORE = 1;
 	public static final int COLUMN_AFTER = 11;
 	public static final int DATA_LEVEL = 1;
+
 }

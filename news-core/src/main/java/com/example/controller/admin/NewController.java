@@ -2,6 +2,7 @@ package com.example.controller.admin;
 
 import com.example.constant.SystemConstant;
 import com.example.dto.NewDTO;
+import com.example.service.ICategoryService;
 import com.example.service.INewService;
 import com.example.utils.DisplayTagUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class NewController {
     @Autowired
     private INewService newService;
 
+    @Autowired
+    private ICategoryService categoryService;
+
     @RequestMapping(value = "/admin/new/list", method = RequestMethod.GET)
     public ModelAndView getNews(@ModelAttribute(SystemConstant.MODEL)NewDTO model,
                                 HttpServletRequest request){
@@ -34,4 +38,15 @@ public class NewController {
         mav.addObject(SystemConstant.MODEL, model);
         return mav;
     }
+
+    @RequestMapping(value = "/admin/new/edit", method = RequestMethod.GET)
+    public ModelAndView editNewsPage(){
+        ModelAndView mav = new ModelAndView("admin/new/edit");
+        NewDTO newDTO = new NewDTO();
+        newDTO.setCategories(categoryService.getCategories());
+        mav.addObject(SystemConstant.MODEL, newDTO);
+        return mav;
+    }
+
+
 }

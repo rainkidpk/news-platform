@@ -5,8 +5,8 @@
         <class>com.example.entity.UserEntity</class>
         <class>com.example.entity.CommentEntity</class>
         <class>com.example.entity.NewEntity</class>
-        <class>com.example.config.JPAConfig</class>
         <class>com.example.entity.RoleEntity</class>
+        <class>com.example.entity.CategoryEntity</class>
     </persistence-unit>
 </persistence>
 

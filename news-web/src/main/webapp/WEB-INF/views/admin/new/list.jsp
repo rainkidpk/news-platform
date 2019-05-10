@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/common/taglib.jsp"%>
 <c:url var="formUrl" value="/admin/new/list"/>
-<%--<c:url var="deleteAPI" value="/api/admin/new"/>--%>
+<c:url var="deleteAPI" value="/api/admin/new"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -81,12 +81,12 @@
                                                     <i class="fa fa-plus-circle bigger-110 purple"></i>
                                                 </span>
                                             </a>
-                                          <%--  <button id="btnDelete" type="button" class="dt-button buttons-html5 btn btn-white btn-primary btn-bold" disabled
+                                            <button id="btnDelete" type="button" class="dt-button buttons-html5 btn btn-white btn-primary btn-bold" disabled
                                                     data-toggle="tooltip" title="Xóa bài viết" onclick="warningBeforeDelete()">
                                                     <span>
                                                     <i class="fa fa-trash-o bigger-110 pink"></i>
                                                 	</span>
-                                            </button>--%>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -113,10 +113,10 @@
                                             <a class="btn btn-sm btn-primary btn-edit" data-toggle="tooltip"
                                                title="Cập nhật bài viết" href='<c:url value="/admin/new/${tableList.id}"/>'><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                             </a>
-                                            <a class="btn btn-sm btn-primary btn-edit" data-toggle="tooltip"
+                                           <%-- <a class="btn btn-sm btn-primary btn-edit" data-toggle="tooltip"
                                                title="Danh sách bình luận" href='<c:url value="/admin/comments/${tableList.id}"/>'>
                                                 <i class="ace-icon fa fa-comment"></i>
-                                            </a>
+                                            </a>--%>
                                         </display:column>
                                     </display:table>
                                 </div>
@@ -135,6 +135,32 @@
     $('#btnSearch').click(function () {
        $('#listForm').submit();
     });
+    
+    function warningBeforeDelete() {
+        showAlertBeforeDelete(function () {
+            event.preventDefault();
+            var dataArray = $('tbody input[type=checkbox]:checked').map(function () {
+                return $(this).val();
+            }).get();
+            deleteNew(dataArray);
+        });
+    }
+
+    function deleteNew(data) {
+        $.ajax({
+            url: '${deleteAPI}',
+            type: 'DELETE',
+            contentType:'application/json',
+            data: JSON.stringify(data),
+            success: function(res) {
+                window.location.href = "<c:url value='/admin/new/list?message=delete_success'/>";
+            },
+            error: function(res) {
+                console.log(res);
+                window.location.href = "<c:url value='/admin/new/list?message=error_system'/>";
+            }
+        });
+    }
 
 </script>
 </body>

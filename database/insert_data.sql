@@ -36,11 +36,11 @@ values('CONG-DONG','Cộng đồng');
 insert into category(code, name)
 values('TAM-SU','Tâm sự');
 
-insert into new(code,thumbnail,title,content,shortDescription, category_id)
-values('BAIVIETTHETHAO1','test','Bán kết world cup 1','Bán kết world cup 1','Bán kết world cup 1',1);
-insert into new(code,thumbnail,title,content,shortDescription, category_id)
-values('BAIVIETTHETHAO2','test2','Bán kết world cup 2','Bán kết world cup 2','Bán kết world cup 2',1);
-insert into new(code,thumbnail,title,content,shortDescription, category_id)
-values('BAIVIETTHETHAO3','test3','Bán kết world cup 3','Bán kết world cup 3','Bán kết world cup 3',1);
-insert into new(code,thumbnail,title,content,shortDescription, category_id)
-values('BAIVIETTHETHAO4','test4','Bán kết world cup 4','Bán kết world cup 4','Bán kết world cup 4',1);
+insert into new(code,thumbnail,title,content,shortDescription, category_id, view)
+values('BAIVIETTHETHAO1','test','Bán kết world cup 1','Bán kết world cup 1','Bán kết world cup 1',1,0);
+insert into new(code,thumbnail,title,content,shortDescription, category_id, view)
+values('BAIVIETTHETHAO2','test2','Bán kết world cup 2','Bán kết world cup 2','Bán kết world cup 2',1,0);
+insert into new(code,thumbnail,title,content,shortDescription, category_id, view)
+values('BAIVIETTHETHAO3','test3','Bán kết world cup 3','Bán kết world cup 3','Bán kết world cup 3',1,0);
+insert into new(code,thumbnail,title,content,shortDescription, category_id, view)
+values('BAIVIETTHETHAO4','test4','Bán kết world cup 4','Bán kết world cup 4','Bán kết world cup 4',1,0);

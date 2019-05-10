@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/common/taglib.jsp"%>
+<c:url var="formUrl" value="/api/admin/new"/>
 <html>
 <head>
     <title>Chỉnh sửa bài viết</title>
@@ -61,7 +62,7 @@
                             <label class="col-sm-3 control-label no-padding-right">Xem trước</label>
                             <div class="col-sm-9">
                                 <c:if test="${not empty model.thumbnail}">
-                                    <c:set var="image" value="/repository/${model.thumbnail}"/>
+                                 <c:set var="image" value="/repository/${model.thumbnail}"/>
                                     <img src="${image}" id="viewImage" width="150px" height="150px">
                                 </c:if>
                                 <c:if test="${empty model.thumbnail}">
@@ -116,6 +117,80 @@
            openImage(this, "viewImage");
        });
    });
+
+    function openImage(input, imageView) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#' +imageView).attr('src', reader.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $('#btnAddOrUpdateNews').click(function (event) {
+        event.preventDefault();
+        var dataArray = {};
+        dataArray["categoryCode"] = $('#category').val();
+        dataArray["title"] = $('#title').val();
+        dataArray["content"] = editor.getData();
+        dataArray["shortDescription"] = $('#shortDescription').val();
+        var files = $('#uploadImage')[0].files[0];
+        if (files == undefined) {
+            dataArray["imageName"] = "";
+            updateNew(dataArray, $('#newId').val());
+        } else {
+            dataArray["imageName"] = files.name;
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                dataArray["thumbnailBase64"] = e.target.result;
+                var id = $('#newId').val();
+                if (id == "") {
+                    addNews(dataArray);
+                } else {
+                    updateNew(dataArray, id);
+                }
+            }
+            reader.readAsDataURL(files);
+        }
+    });
+
+    function addNews(data) {
+        $.ajax({
+            url: '${formUrl}',
+            type: 'POST',
+            dataType: 'json',
+            contentType:'application/json',
+            data: JSON.stringify(data),
+            success: function(res) {
+                window.location.href = "<c:url value='/admin/new/list?message=insert_success'/>";
+            },
+            error: function(res) {
+                console.log(res);
+                window.location.href = "<c:url value='/admin/new/list?message=error_system'/>";
+            }
+        });
+    }
+
+    function updateNew(data, id) {
+        $.ajax({
+            url: '${formUrl}/'+id,
+            type: 'PUT',
+            dataType: 'json',
+            contentType:'application/json',
+            data: JSON.stringify(data),
+            success: function(res) {
+                window.location.href = "<c:url value='/admin/new/list'/>";
+            },
+            error: function(res) {
+                console.log(res);
+                window.location.href = "<c:url value='/admin/new/list'/>";
+            }
+        });
+    }
+
+
+
 </script>
 </body>
 </html>

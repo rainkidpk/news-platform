@@ -23,6 +23,6 @@ public class CategoryService implements ICategoryService {
         entities.forEach(item -> {
             categories.put(item.getCode(), item.getName());
         });
-        return null;
+        return categories;
     }
 }

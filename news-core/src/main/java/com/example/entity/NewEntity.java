@@ -18,11 +18,14 @@ public class NewEntity extends BaseEntity{
     @Column
     private String title;
 
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String content;
 
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String shortDescription;
+
+    @Column
+    private int view;
 
 
     @ManyToOne
@@ -78,5 +81,13 @@ public class NewEntity extends BaseEntity{
 
     public void setCategory(CategoryEntity category) {
         this.category = category;
+    }
+
+    public int getView() {
+        return view;
+    }
+
+    public void setView(int view) {
+        this.view = view;
     }
 }

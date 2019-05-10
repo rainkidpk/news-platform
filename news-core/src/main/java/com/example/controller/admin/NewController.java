@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -47,6 +48,15 @@ public class NewController {
         mav.addObject(SystemConstant.MODEL, newDTO);
         return mav;
     }
+
+    @RequestMapping(value = "/admin/new/{id}", method = RequestMethod.GET)
+    public ModelAndView getNewById(@PathVariable("id") long id){
+        ModelAndView mav = new ModelAndView("admin/new/edit");
+        mav.addObject(SystemConstant.MODEL, newService.findNewById(id));
+        return mav;
+    }
+
+
 
 
 }

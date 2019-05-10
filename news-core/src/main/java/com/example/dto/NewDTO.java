@@ -13,6 +13,29 @@ public class NewDTO extends AbstractDTO<NewDTO>{
     private String shortDescription;
     private Map<String, String> categories;
     private String categoryCode;
+    private String imageName;
+
+    public String getThumbnailBase64() {
+        if( thumbnailBase64 == null){
+            return thumbnailBase64;
+        }
+        return thumbnailBase64.split(",")[1];
+    }
+
+    public void setThumbnailBase64(String thumbnailBase64) {
+        this.thumbnailBase64 = thumbnailBase64;
+    }
+
+    private String thumbnailBase64;
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
 
 
 

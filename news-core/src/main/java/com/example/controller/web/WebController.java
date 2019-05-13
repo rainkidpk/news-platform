@@ -1,5 +1,6 @@
 package com.example.controller.web;
 
+import com.example.constant.SystemConstant;
 import com.example.dto.UserDTO;
 import com.example.service.INewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,8 @@ public class WebController {
     @RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
     public ModelAndView homePage(){
         ModelAndView mav = new ModelAndView("web/home");
-        mav.addObject("news", newService.getAll());
+        mav.addObject(SystemConstant.MODEL, newService.getHomeDetail());
+
         return mav;
     }
 

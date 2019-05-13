@@ -5,17 +5,13 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 
 public class ReadFileUtils extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String imageUrl = request.getRequestURI();
-        //bo repository
         int repIndex = imageUrl.indexOf("/repository/");
         String relativeImagePath = null;
         if(repIndex != -1) {
@@ -24,7 +20,6 @@ public class ReadFileUtils extends HttpServlet {
         }
         ServletOutputStream outStream;
         outStream = response.getOutputStream();
-        //write file
         FileInputStream fin = new FileInputStream(relativeImagePath);
         BufferedInputStream bin = new BufferedInputStream(fin);
         BufferedOutputStream bout = new BufferedOutputStream(outStream);

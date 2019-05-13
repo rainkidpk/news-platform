@@ -14,6 +14,7 @@ public class NewDTO extends AbstractDTO<NewDTO>{
     private Map<String, String> categories;
     private String categoryCode;
     private String imageName;
+    private String thumbnailBase64;
 
     public String getThumbnailBase64() {
         if( thumbnailBase64 == null){
@@ -26,7 +27,7 @@ public class NewDTO extends AbstractDTO<NewDTO>{
         this.thumbnailBase64 = thumbnailBase64;
     }
 
-    private String thumbnailBase64;
+
 
     public String getImageName() {
         return imageName;

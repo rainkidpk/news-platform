@@ -1,9 +1,11 @@
 package com.example.service;
 
+import com.example.dto.HomeDTO;
 import com.example.dto.NewDTO;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Map;
 
 public interface INewService {
     List<NewDTO> getAll();
@@ -13,4 +15,6 @@ public interface INewService {
     NewDTO update(NewDTO updateNew, long id);
     NewDTO findNewById(long id);
     void delete(long[] ids);
+    Map<String, String> getMessageResponse(String message);
+    HomeDTO getHomeDetail();
 }

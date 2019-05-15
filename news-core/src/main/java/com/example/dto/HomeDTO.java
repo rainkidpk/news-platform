@@ -9,6 +9,7 @@ public class HomeDTO implements Serializable {
 
     private List<NewDTO> topViews;
     private List<NewDTO> topNewDates;
+    private List<CategoryDTO> categories;
 
     public List<NewDTO> getTopViews() {
         return topViews;
@@ -24,5 +25,13 @@ public class HomeDTO implements Serializable {
 
     public void setTopNewDates(List<NewDTO> topNewDates) {
         this.topNewDates = topNewDates;
+    }
+
+    public List<CategoryDTO> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<CategoryDTO> categories) {
+        this.categories = categories;
     }
 }

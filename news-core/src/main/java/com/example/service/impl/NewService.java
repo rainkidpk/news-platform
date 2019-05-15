@@ -1,9 +1,12 @@
 package com.example.service.impl;
 
 import com.example.constant.SystemConstant;
+import com.example.converter.CategoryConverter;
 import com.example.converter.NewConverter;
+import com.example.dto.CategoryDTO;
 import com.example.dto.HomeDTO;
 import com.example.dto.NewDTO;
+import com.example.entity.CategoryEntity;
 import com.example.entity.NewEntity;
 import com.example.repository.CategoryRepository;
 import com.example.repository.NewRepository;
@@ -39,6 +42,9 @@ public class NewService implements INewService {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private CategoryConverter categoryConverter;
 
     @Override
     public List<NewDTO> getAll() {
@@ -152,7 +158,66 @@ public class NewService implements INewService {
         HomeDTO result = new HomeDTO();
         result.setTopViews(getTopViews());
         result.setTopNewDates(getTopNewDates());
+        result.setCategories(getCategories());
         return result;
+    }
+
+    @Override
+    public NewDTO getNewByCategory(String title, long categoryId, String code) {
+        NewDTO newDTO = new NewDTO();
+        newDTO.setCategoryId(categoryId);
+        newDTO.setCategoryCode(code);
+        if(StringUtils.isNotBlank(title)){
+            newDTO.setPage(1);
+        }
+
+        Pageable pageable = new PageRequest(newDTO.getPage() - 1, newDTO.getMaxPageItems());
+        CategoryEntity categoryEntity = categoryRepository.findOne(categoryId);
+        newDTO.setListResult(findNewByCategory(categoryEntity, pageable, title));
+        newDTO.setTotalItems(getTotalItems(categoryEntity, title));
+        newDTO.setTotalPages((int) Math.ceil((double) newDTO.getTotalItems()/newDTO.getMaxPageItems()));
+        return newDTO;
+    }
+
+    @Override
+    public NewDTO getNewDetail(long id) {
+        NewEntity newEntity = newRepository.findOne(id);
+        newEntity.setView(newEntity.getView() + 1);
+        newEntity = newRepository.save(newEntity);
+        return newConverter.convertToDto(newEntity);
+    }
+
+    private int getTotalItems(CategoryEntity categoryEntity, String title) {
+        int total = 0;
+        if(title != null) {
+            total = (int) newRepository.countByCategoryAndTitleContainingIgnoreCase(categoryEntity, title);
+        } else {
+            total = (int) newRepository.countByCategory(categoryEntity);
+        }
+        return total;
+    }
+
+    private List<NewDTO> findNewByCategory(CategoryEntity categoryEntity, Pageable pageable, String title) {
+        List<NewEntity> newEntities = new ArrayList<>();
+        if(title != null){
+            newEntities = newRepository.findByCategoryAndTitleContainingIgnoreCase(categoryEntity, title, pageable).getContent();
+        } else {
+            newEntities = newRepository.findByCategory(categoryEntity,  pageable).getContent();
+        }
+        List<NewDTO> newDTOs = new ArrayList<>();
+        newEntities.forEach(item -> {
+            newDTOs.add(newConverter.convertToDto(item));
+        });
+        return newDTOs;
+    }
+
+    private List<CategoryDTO> getCategories() {
+        List<CategoryEntity> entities = categoryRepository.findAll();
+        List<CategoryDTO> dtos = new ArrayList<>();
+        entities.forEach(item -> {
+            dtos.add(categoryConverter.converToDto(item));
+        });
+        return dtos;
     }
 
     private List<NewDTO> getTopNewDates() {

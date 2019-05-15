@@ -15,6 +15,7 @@ public class NewDTO extends AbstractDTO<NewDTO>{
     private String categoryCode;
     private String imageName;
     private String thumbnailBase64;
+    private long categoryId;
 
     public String getThumbnailBase64() {
         if( thumbnailBase64 == null){
@@ -94,5 +95,13 @@ public class NewDTO extends AbstractDTO<NewDTO>{
 
     public void setCategoryCode(String categoryCode) {
         this.categoryCode = categoryCode;
+    }
+
+    public long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(long categoryId) {
+        this.categoryId = categoryId;
     }
 }

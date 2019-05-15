@@ -13,6 +13,12 @@
         <div class="categories">
             <ul>
                 <h3>Thể loại</h3>
+                <c:forEach var="item" items="${model.categories}">
+                    <li>
+                        <a href='<c:url value="/tin-tuc/${item.id}/${newstags:seoURL(item.code)}"/> '>${item.name}</a>
+                    </li>
+                </c:forEach>
+
             </ul>
         </div>
     </div>

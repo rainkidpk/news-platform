@@ -17,4 +17,6 @@ public interface INewService {
     void delete(long[] ids);
     Map<String, String> getMessageResponse(String message);
     HomeDTO getHomeDetail();
+    NewDTO getNewByCategory(String title, long categoryId, String code);
+    NewDTO getNewDetail(long id);
 }

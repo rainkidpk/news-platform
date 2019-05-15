@@ -88,6 +88,13 @@
         </url-pattern>
     </servlet-mapping>
 
+    <jsp-config>
+        <taglib>
+            <taglib-uri>customelfunction</taglib-uri>
+            <taglib-location>/WEB-INF/elcustom/customelfunction.tld</taglib-location>
+        </taglib>
+    </jsp-config>
+
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
